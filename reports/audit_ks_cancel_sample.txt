@@ -1,0 +1,50 @@
+2027-01-06T16:37:00+05:30  [approval_decided]  ks_cancel  apr_00010 approved
+    {"event": {"type": "approval_decided", "ts": "2027-01-06T16:37:00+05:30", "approval_id": "apr_00010", "workflow_id": "ks_cancel", "status": "approved", "reasons": [], "event_id": 224977}}
+2027-01-06T17:00:00+05:30  [applied]  ks_cancel  applied apr_00010 on ks_cancel → v5
+    {"body": {"workflow_id": "ks_cancel", "version": 5, "changed_dims": ["caller_id"]}, "approval": {"approval_id": "apr_00010", "proposal_id": "aprreq-d00f168a-ad96-47cc-ba00-2d1d9f67ddf0", "workflow_id": "ks_cancel", "status": "approved", "base_version": 4, "changed_dims": ["caller_id"], "created_at":
+2027-01-06T17:00:00+05:30  [config_changed_observed]  ks_cancel  ks_cancel → v5 by controller_approved
+    {"event": {"type": "config_changed", "ts": "2027-01-06T17:00:00+05:30", "workflow_id": "ks_cancel", "version": 5, "actor": "controller_approved", "changed_dims": ["caller_id"], "proposal_id": "aprreq-d00f168a-ad96-47cc-ba00-2d1d9f67ddf0", "approval_id": "apr_00010", "event_id": 224978}}
+2027-01-07T11:30:00+05:30  [config_changed_observed]  ks_cancel  ks_cancel → v6 by supervisor
+    {"event": {"type": "config_changed", "ts": "2027-01-07T11:30:00+05:30", "workflow_id": "ks_cancel", "version": 6, "actor": "supervisor", "changed_dims": ["prompt_version"], "proposal_id": null, "approval_id": null, "event_id": 233732}}
+2027-01-07T11:30:00+05:30  [supervisor_prompt_watch]  ks_cancel  supervisor changed prompt on ks_cancel → P2; watching
+    {"version": 6}
+2027-01-07T13:00:00+05:30  [halluc_detected]  ks_cancel  ks_cancel halluc_rate=0.051 on 178 connected
+    {"row": {"value": "P2", "dials": 600, "connected": 178, "engaged": 85, "halluc": 9}, "threshold": 0.03, "base_rate": 0.01506563245823389, "forced": true}
+2027-01-07T13:00:00+05:30  [validation]  ks_cancel  ks_cancel validate P1 → {'validation_run_id': 'val_00001', 'workflow_id': 'ks_cancel', 'prompt_version': 'P1', 'n': 200, 'failures': 3, 'pass_rate': 0.985, 'ts': '2027-01-07T13:00:00+05:30', 'credits_remaining': 195.0}
+    {"response": {"validation_run_id": "val_00001", "workflow_id": "ks_cancel", "prompt_version": "P1", "n": 200, "failures": 3, "pass_rate": 0.985, "ts": "2027-01-07T13:00:00+05:30", "credits_remaining": 195.0}}
+2027-01-07T13:00:00+05:30  [proposal_submitted]  ks_cancel  Swap to P1 after hallucination spike on P2
+    {"approval_id": "apr_00013", "diff": {"prompt_version": {"from": "P2", "to": "P1"}}, "impact": 1.0}
+2027-01-07T14:00:00+05:30  [halluc_detected]  ks_cancel  ks_cancel halluc_rate=0.069 on 288 connected
+    {"row": {"value": "P2", "dials": 1000, "connected": 288, "engaged": 130, "halluc": 20}, "threshold": 0.03, "base_rate": 0.01506563245823389, "forced": true}
+2027-01-07T14:14:00+05:30  [approval_decided]  ks_cancel  apr_00013 approved
+    {"event": {"type": "approval_decided", "ts": "2027-01-07T14:14:00+05:30", "approval_id": "apr_00013", "workflow_id": "ks_cancel", "status": "approved", "reasons": [], "event_id": 236433}}
+2027-01-07T15:00:00+05:30  [applied]  ks_cancel  applied apr_00013 on ks_cancel → v7
+    {"body": {"workflow_id": "ks_cancel", "version": 7, "changed_dims": ["prompt_version"]}, "approval": {"approval_id": "apr_00013", "proposal_id": "aprreq-674e1020-20cf-424e-854f-b6cb68784372", "workflow_id": "ks_cancel", "status": "approved", "base_version": 6, "changed_dims": ["prompt_version"], "cr
+2027-01-07T15:00:00+05:30  [config_changed_observed]  ks_cancel  ks_cancel → v7 by controller_approved
+    {"event": {"type": "config_changed", "ts": "2027-01-07T15:00:00+05:30", "workflow_id": "ks_cancel", "version": 7, "actor": "controller_approved", "changed_dims": ["prompt_version"], "proposal_id": "aprreq-674e1020-20cf-424e-854f-b6cb68784372", "approval_id": "apr_00013", "event_id": 236884}}
+2027-01-08T16:00:00+05:30  [winner_selected]  ks_cancel  ks_cancel welcome_message=W2
+    {"candidates": [{"value": "W2", "n": 1186, "s": 627, "rate": 0.5286677908937606, "wilson": 0.504858250837807, "g_n": 4863, "g_s": 1186, "g_rate": 0.2438823771334567}, {"value": "W1", "n": 19472, "s": 9760, "rate": 0.5012325390304027, "wilson": 0.49535643004728297, "g_n": 77136, "g_s": 19472, "g_rate
+2027-01-08T16:00:00+05:30  [proposal_submitted]  ks_cancel  promote welcome_message=W2 (z=1.8346333445961704)
+    {"approval_id": "apr_00015", "diff": {"promote.welcome_message": {"winner": "W2", "meta": {"candidates": [{"value": "W2", "n": 1186, "s": 627, "rate": 0.5286677908937606, "wilson": 0.504858250837807, "g_n": 4863, "g_s": 1186, "g_rate": 0.2438823771334567}, {"value": "W1", "n": 19472, "s": 9760, "rat
+2027-01-08T17:32:00+05:30  [approval_decided]  ks_cancel  apr_00015 approved
+    {"event": {"type": "approval_decided", "ts": "2027-01-08T17:32:00+05:30", "approval_id": "apr_00015", "workflow_id": "ks_cancel", "status": "approved", "reasons": [], "event_id": 253293}}
+2027-01-08T18:00:00+05:30  [applied]  ks_cancel  applied apr_00015 on ks_cancel → v8
+    {"body": {"workflow_id": "ks_cancel", "version": 8, "changed_dims": ["welcome_message"]}, "approval": {"approval_id": "apr_00015", "proposal_id": "aprreq-4f35c25e-e4c4-4ded-aff7-893be2e12724", "workflow_id": "ks_cancel", "status": "approved", "base_version": 7, "changed_dims": ["welcome_message"], "
+2027-01-08T18:00:00+05:30  [config_changed_observed]  ks_cancel  ks_cancel → v8 by controller_approved
+    {"event": {"type": "config_changed", "ts": "2027-01-08T18:00:00+05:30", "workflow_id": "ks_cancel", "version": 8, "actor": "controller_approved", "changed_dims": ["welcome_message"], "proposal_id": "aprreq-4f35c25e-e4c4-4ded-aff7-893be2e12724", "approval_id": "apr_00015", "event_id": 253294}}
+2027-01-10T12:00:00+05:30  [winner_selected]  ks_cancel  ks_cancel voice=V3
+    {"candidates": [{"value": "V3", "n": 1350, "s": 711, "rate": 0.5266666666666666, "wilson": 0.5043499380551275, "g_n": 5713, "g_s": 1350, "g_rate": 0.23630316821284789}, {"value": "V2", "n": 1426, "s": 740, "rate": 0.5189340813464236, "wilson": 0.49721970426577805, "g_n": 5721, "g_s": 1426, "g_rate":
+2027-01-10T12:00:00+05:30  [proposal_submitted]  ks_cancel  promote voice=V3 (z=1.7899817778594203)
+    {"approval_id": "apr_00019", "diff": {"promote.voice": {"winner": "V3", "meta": {"candidates": [{"value": "V3", "n": 1350, "s": 711, "rate": 0.5266666666666666, "wilson": 0.5043499380551275, "g_n": 5713, "g_s": 1350, "g_rate": 0.23630316821284789}, {"value": "V2", "n": 1426, "s": 740, "rate": 0.5189
+2027-01-10T13:19:00+05:30  [approval_decided]  ks_cancel  apr_00019 approved
+    {"event": {"type": "approval_decided", "ts": "2027-01-10T13:19:00+05:30", "approval_id": "apr_00019", "workflow_id": "ks_cancel", "status": "approved", "reasons": [], "event_id": 276884}}
+2027-01-10T14:00:00+05:30  [applied]  ks_cancel  applied apr_00019 on ks_cancel → v9
+    {"body": {"workflow_id": "ks_cancel", "version": 9, "changed_dims": ["voice"]}, "approval": {"approval_id": "apr_00019", "proposal_id": "aprreq-077ae1d4-5fa7-4fe3-a0fb-8650ba0a515d", "workflow_id": "ks_cancel", "status": "approved", "base_version": 8, "changed_dims": ["voice"], "created_at": "2027-0
+2027-01-10T14:00:00+05:30  [config_changed_observed]  ks_cancel  ks_cancel → v9 by controller_approved
+    {"event": {"type": "config_changed", "ts": "2027-01-10T14:00:00+05:30", "workflow_id": "ks_cancel", "version": 9, "actor": "controller_approved", "changed_dims": ["voice"], "proposal_id": "aprreq-077ae1d4-5fa7-4fe3-a0fb-8650ba0a515d", "approval_id": "apr_00019", "event_id": 277110}}
+2027-01-11T11:00:00+05:30  [proposal_submitted]  ks_cancel  Rotate off unhealthy caller IDs: ['D1']; keep ['D2', 'D3']
+    {"approval_id": "apr_00021", "diff": {"caller_id": {"D2": 1.0, "D3": 1.0}, "unhealthy": ["D1"]}, "impact": 0.7747734224006908}
+2027-01-11T11:48:00+05:30  [approval_decided]  ks_cancel  apr_00021 rejected
+    {"event": {"type": "approval_decided", "ts": "2027-01-11T11:48:00+05:30", "approval_id": "apr_00021", "workflow_id": "ks_cancel", "status": "rejected", "reasons": ["approver declined (judgement call)"], "event_id": 289241}}
+2027-01-11T13:00:00+05:30  [proposal_closed]  ks_cancel  apr_00021 rejected
+    {"reasons": ["approver declined (judgement call)"], "approval": {"approval_id": "apr_00021", "proposal_id": "aprreq-8dbd023e-19ce-4328-8b60-520db0706beb", "workflow_id": "ks_cancel", "status": "rejected", "base_version": 9, "changed_dims": ["caller_id"], "created_at": "2027-01-11T11:00:00+05:30", "e

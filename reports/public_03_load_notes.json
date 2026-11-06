@@ -1,0 +1,7 @@
+{
+  "bootstrap_s": 204.8,
+  "one_sim_day_wall_s": 44.78,
+  "events_so_far": 6377543,
+  "sim_rss_kb": 412912,
+  "note": "partial: ingest-only day after bootstrap; full loop is similar order"
+}

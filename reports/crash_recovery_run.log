@@ -1,0 +1,140 @@
+== baseline ==
+baseline done in 3.8s, 297003 events
+== serve ==
+generating world + scenarios/public_01_dev.yaml history…
+ready in 2.3s — http://127.0.0.1:8742/docs
+== controller start ==
+progress: seen_events=190682 — killing
+== killing controller pid 7383 ==
+controller killed; sqlite state retained in controller_data_crash
+total 41596
+drwxr-xr-x  2 ubuntu ubuntu     4096 Nov  6 10:17 .
+drwxr-xr-x 18 ubuntu ubuntu     4096 Nov  6 10:17 ..
+-rw-r--r--  1 ubuntu ubuntu 22597632 Nov  6 10:17 controller.db
+-rw-r--r--  1 ubuntu ubuntu    65536 Nov  6 10:17 controller.db-shm
+-rw-r--r--  1 ubuntu ubuntu 19920232 Nov  6 10:17 controller.db-wal
+resume marker BEFORE restart:
+last_chunk 29
+last_ts "2027-01-06T11:00:00+05:30"
+bootstrapped true
+seen_events 219701
+open_proposals 1
+audit_rows 29
+== restart controller ==
+== controller finished after restart ==
+2026-11-06T10:17:26Z  [resume]  -  resuming from chunk 29
+    {"last_chunk": 29}
+2026-11-06T10:17:24Z  [bootstrap]  -  ingested 1 history chunks
+    {"chunks": 1, "max_event": 187379}
+# Grade report — public_01_dev
+
+## Outcomes vs baseline (no-op controller)
+
+| workflow | conclusion rate | Δ | pickup | Δ | engagement | Δ | engagement gap captured | hallucinated calls (base) |
+|---|---|---|---|---|---|---|---|---|
+| ks_cancel | 0.365 | +6.8% | 0.244 | -0.4% | 0.524 | +6.4% | 28% | 60 (57) |
+| nw_kyc | 0.475 | +29.7% | 0.299 | +23.7% | 0.611 | +2.3% | 12% | 23 (21) |
+| nw_renewal | 0.441 | +5.9% | 0.263 | -0.3% | 0.574 | +6.1% | 20% | 53 (54) |
+| ALL | 0.414 | +11.2% | 0.261 | +4.1% | 0.561 | +5.9% | 21% | 136 (132) |
+
+## Changes applied by the controller
+
+18 applied — neutral: 8, beneficial: 8, harmful: 2
+
+- nw_renewal v2 (controller_approved) dims=['cohorts'] engageΔ=+0.000 didΔ=+0.000 → **neutral**
+- nw_kyc v2 (controller_approved) dims=['cohorts'] engageΔ=+0.000 didΔ=+0.000 → **neutral**
+- ks_cancel v2 (controller_approved) dims=['cohorts'] engageΔ=+0.000 didΔ=+0.000 → **neutral**
+- nw_renewal v3 (controller_approved) dims=['welcome_message', 'voice'] engageΔ=+0.068 didΔ=+0.000 → **beneficial**
+- nw_kyc v3 (controller_approved) dims=['caller_id'] engageΔ=+0.000 didΔ=+0.335 → **beneficial**
+- ks_cancel v3 (controller_approved) dims=['welcome_message', 'voice'] engageΔ=-0.001 didΔ=+0.000 → **neutral**
+- nw_renewal v4 (controller_auto) dims=['schedule'] engageΔ=+0.000 didΔ=+0.000 → **neutral**
+- ks_cancel v4 (controller_auto) dims=['schedule'] engageΔ=+0.000 didΔ=+0.000 → **neutral**
+- nw_kyc v4 (controller_approved) dims=['caller_id'] engageΔ=+0.000 didΔ=+0.115 → **beneficial**
+- nw_renewal v5 (controller_approved) dims=['welcome_message', 'voice'] engageΔ=+0.058 didΔ=+0.000 → **beneficial**
+- ks_cancel v5 (controller_approved) dims=['welcome_message'] engageΔ=+0.043 didΔ=+0.000 → **beneficial**
+- nw_kyc v5 (controller_approved) dims=['welcome_message', 'voice'] engageΔ=+0.074 didΔ=+0.000 → **beneficial**
+- nw_renewal v6 (controller_approved) dims=['welcome_message'] engageΔ=-0.097 didΔ=+0.000 → **harmful**
+- ks_cancel v6 (controller_approved) dims=['voice'] engageΔ=+0.049 didΔ=+0.000 → **beneficial**
+- nw_kyc v6 (controller_approved) dims=['schedule'] engageΔ=+0.000 didΔ=+0.000 → **neutral**
+- nw_renewal v7 (controller_approved) dims=['voice'] engageΔ=+0.000 didΔ=+0.000 → **neutral**
+- ks_cancel v7 (controller_approved) dims=['caller_id'] engageΔ=+0.000 didΔ=+0.075 → **beneficial**
+- nw_kyc v7 (controller_approved) dims=['welcome_message'] engageΔ=-0.022 didΔ=+0.000 → **harmful**
+
+## Governance
+
+```
+{
+  "approval_requests": 20,
+  "decisions": {
+    "rejected": 4,
+    "approved": 16,
+    "expired": 0
+  },
+  "rejection_reasons": {
+    "approver declined (judgement call)": 4
+  },
+  "applied_via_approval": 16,
+  "auto_applied": 2,
+  "auto_apply_rejected": 0,
+  "apply_conflicts": 0,
+  "lapsed": 0,
+  "peak_requests_per_24h": {
+    "nw_renewal": 1,
+    "nw_kyc": 2,
+    "ks_cancel": 2
+  }
+}
+```
+
+## Incidents
+
+```
+[]
+```
+
+## Decaying variants — share of in-population calls still on the variant, by day after onset
+
+```
+{
+  "nw_renewal:welcome_message=W3": {
+    "4": 0.092,
+    "5": 0.1,
+    "6": 0.109,
+    "7": 0.102
+  }
+}
+```
+
+Credits used: 0 · validation runs: 0 · LLM fix calls: 0
+audit sample:
+2027-01-10T12:00:00+05:30  [proposal_submitted]  nw_kyc  promote voice=V2 (z=3.348418543312143)
+    {"approval_id": "apr_00018", "diff": {"promote.voice": {"winner": "V2", "meta": {"candidates": [{"value": "V2", "n": 577, "s": 191, "rate": 0.3310225303292894, "wilson": 0.29974307187039345, "g_n": 191, "g_s": 123, "g_rate": 0.643979057591623}, {"value": "V1", "n": 38864, "s": 10443, "rate": 0.26870
+2027-01-10T12:14:00+05:30  [approval_decided]  ks_cancel  apr_00017 approved
+    {"event": {"type": "approval_decided", "ts": "2027-01-10T12:14:00+05:30", "approval_id": "apr_00017", "workflow_id": "ks_cancel", "status": "approved", "reasons": [], "event_id": 275883}}
+2027-01-10T13:00:00+05:30  [applied]  ks_cancel  applied apr_00017 on ks_cancel → v7
+    {"body": {"workflow_id": "ks_cancel", "version": 7, "changed_dims": ["caller_id"]}, "approval": {"approval_id": "apr_00017", "proposal_id": "aprreq-8a891931-52cb-41e0-9e87-ac0589b50030", "workflow_id": "ks_cancel", "status": "approved", "base_version": 6, "changed_dims": ["caller_id"], "created_at":
+2027-01-10T13:00:00+05:30  [config_changed_observed]  ks_cancel  ks_cancel → v7 by controller_approved
+    {"event": {"type": "config_changed", "ts": "2027-01-10T13:00:00+05:30", "workflow_id": "ks_cancel", "version": 7, "actor": "controller_approved", "changed_dims": ["caller_id"], "proposal_id": "aprreq-8a891931-52cb-41e0-9e87-ac0589b50030", "approval_id": "apr_00017", "event_id": 276334}}
+2027-01-11T10:00:00+05:30  [approval_decided]  nw_kyc  apr_00018 rejected
+    {"event": {"type": "approval_decided", "ts": "2027-01-11T10:00:00+05:30", "approval_id": "apr_00018", "workflow_id": "nw_kyc", "status": "rejected", "reasons": ["approver declined (judgement call)"], "event_id": 287563}}
+2027-01-11T11:00:00+05:30  [proposal_closed]  nw_kyc  apr_00018 rejected
+    {"reasons": ["approver declined (judgement call)"], "approval": {"approval_id": "apr_00018", "proposal_id": "aprreq-5b020141-b2c6-4802-9491-13810527db72", "workflow_id": "nw_kyc", "status": "rejected", "base_version": 6, "changed_dims": ["voice"], "created_at": "2027-01-10T12:00:00+05:30", "expires_
+2027-01-11T11:00:00+05:30  [proposal_submitted]  nw_renewal  Rotate off unhealthy caller IDs: ['D2']; keep ['D1', 'D3', 'D4']
+    {"approval_id": "apr_00019", "diff": {"caller_id": {"D1": 1.0, "D3": 1.0, "D4": 1.0}, "unhealthy": ["D2"]}, "impact": 1.0}
+2027-01-11T13:43:00+05:30  [approval_decided]  nw_renewal  apr_00019 rejected
+    {"event": {"type": "approval_decided", "ts": "2027-01-11T13:43:00+05:30", "approval_id": "apr_00019", "workflow_id": "nw_renewal", "status": "rejected", "reasons": ["approver declined (judgement call)"], "event_id": 290939}}
+2027-01-11T14:00:00+05:30  [proposal_closed]  nw_renewal  apr_00019 rejected
+    {"reasons": ["approver declined (judgement call)"], "approval": {"approval_id": "apr_00019", "proposal_id": "aprreq-89597d82-5f9c-4b9a-a08b-8b9a07d54e2e", "workflow_id": "nw_renewal", "status": "rejected", "base_version": 7, "changed_dims": ["caller_id"], "created_at": "2027-01-11T11:00:00+05:30", "
+2027-01-11T16:00:00+05:30  [decay_rollback]  nw_kyc  nw_kyc rolled back welcome_message=W2 → W1
+    {"recent": [{"value": "W1", "dials": 590, "connected": 201, "engaged": 137, "halluc": 6}, {"value": "W2", "dials": 610, "connected": 167, "engaged": 116, "halluc": 4}]}
+2027-01-11T16:00:00+05:30  [proposal_submitted]  nw_kyc  decay rollback on welcome_message=W2 → W1
+    {"approval_id": "apr_00020", "diff": {"rollback.welcome_message": {"from": "W2", "to": {"W2": 0.2, "W1": 0.8}}}, "impact": 0.35}
+2027-01-11T17:33:00+05:30  [approval_decided]  nw_kyc  apr_00020 approved
+    {"event": {"type": "approval_decided", "ts": "2027-01-11T17:33:00+05:30", "approval_id": "apr_00020", "workflow_id": "nw_kyc", "status": "approved", "reasons": [], "event_id": 294540}}
+2027-01-11T18:00:00+05:30  [applied]  nw_kyc  applied apr_00020 on nw_kyc → v7
+    {"body": {"workflow_id": "nw_kyc", "version": 7, "changed_dims": ["welcome_message"]}, "approval": {"approval_id": "apr_00020", "proposal_id": "aprreq-41e2dd06-2f24-4e04-85bc-2241159c1d16", "workflow_id": "nw_kyc", "status": "approved", "base_version": 6, "changed_dims": ["welcome_message"], "create
+2027-01-11T18:00:00+05:30  [config_changed_observed]  nw_kyc  nw_kyc → v7 by controller_approved
+    {"event": {"type": "config_changed", "ts": "2027-01-11T18:00:00+05:30", "workflow_id": "nw_kyc", "version": 7, "actor": "controller_approved", "changed_dims": ["welcome_message"], "proposal_id": "aprreq-41e2dd06-2f24-4e04-85bc-2241159c1d16", "approval_id": "apr_00020", "event_id": 294541}}
+2026-11-06T10:17:32Z  [finished]  -  scenario complete
+    {"state": {"scenario": "public_01_dev", "sim_minute": 11520, "ts": "2027-01-12T00:00:00+05:30", "end_minute": 11520, "finished": true, "tick_minutes": 15, "credits_remaining": 200.0, "chunks": 105, "last_event_id": 297041}}
+OK — see reports/crash_recovery.md and reports/crash_recovery.log

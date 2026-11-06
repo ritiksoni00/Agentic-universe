@@ -1,0 +1,11 @@
+runs/
+__pycache__/
+*.pyc
+.venv/
+controller_data/
+*.db
+.pytest_cache/
+.DS_Store
+controller_data*/
+reports/crash_controller_*.log
+reports/*_controller.log
